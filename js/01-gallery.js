@@ -18,3 +18,26 @@ const imgMarkup = galleryItems
   .join('');
 
 galleryRef.insertAdjacentHTML('beforeend', imgMarkup);
+
+let instance = basicLightbox;
+
+const onModalOpen = event => {
+  event.preventDefault();
+  if (event.target.nodeName !== 'IMG') {
+    return;
+  } else {
+    instance = basicLightbox.create(
+      `<img src="${event.target.dataset.source}">`,
+    );
+    instance.show();
+  }
+};
+
+const onModalClose = event => {
+  if (event.key === 'Escape' && instance.visible()) {
+    instance.close();
+  }
+};
+
+document.addEventListener('keydown', onModalClose);
+galleryRef.addEventListener('click', onModalOpen);
