@@ -25,12 +25,9 @@ const onModalOpen = event => {
   event.preventDefault();
   if (event.target.nodeName !== 'IMG') {
     return;
-  } else {
-    instance = basicLightbox.create(
-      `<img src="${event.target.dataset.source}">`,
-    );
-    instance.show();
   }
+  instance = basicLightbox.create(`<img src="${event.target.dataset.source}">`);
+  instance.show();
 };
 
 const onModalClose = event => {
